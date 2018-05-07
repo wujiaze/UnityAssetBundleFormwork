@@ -1,0 +1,21 @@
+ManifestFileVersion: 0
+CRC: 3179707024
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: 9affb2a874edea3a1270efae1ee9d3c5
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 6f165f44e4778b6c9d85e7a145a54cb1
+HashAppended: 0
+ClassTypes:
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+Assets:
+- Assets/AB_Res/Scene_1/Materials_1/floor.mat
+Dependencies:
+- "D:/Desktop/\u65B0\u5EFA\u6587\u4EF6\u5939/AssetBundleProject/AssetBundleFormwork/AssetBundleFormwork/Assets/StreamingAssets/Window/scene_1/textures_1.ab"
