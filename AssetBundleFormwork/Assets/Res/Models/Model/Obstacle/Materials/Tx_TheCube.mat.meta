@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: 4bd82d3442f86445a8c10b159cdb2eb2
 NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
   userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  assetBundleName: models/model
+  assetBundleVariant: ab

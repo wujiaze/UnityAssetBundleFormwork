@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 9325c1d910b3b5048baa72ad358ad8af
-timeCreated: 1525530255
+guid: 8ef42e4f489de1d4ea6caf9a2188ad7a
+timeCreated: 1525745941
 licenseType: Pro
 NativeFormatImporter:
   externalObjects: {}
   mainObjectFileID: 2100000
   userData: 
-  assetBundleName: scene_1/textures_1
+  assetBundleName: models/model
   assetBundleVariant: ab

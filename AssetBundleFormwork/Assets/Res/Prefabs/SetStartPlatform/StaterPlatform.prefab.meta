@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: efb5880d19cb74bb98f6bf190a33e09f
 NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
   userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  assetBundleName: prefabs/setstartplatform
+  assetBundleVariant: ab

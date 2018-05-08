@@ -138,14 +138,15 @@ namespace AssetBundleFormWork
         }
 
         /// <summary>
-        /// 释放资源
+        /// 释放当前场景所有资源
         /// </summary>
         /// <param name="sceneName">场景名称</param>
         public void  DisposeAllAssets(string sceneName)
         {
-            if (_DicAllScenes.ContainsKey(sceneName))
+            string tmpsceneName = sceneName.ToLower();
+            if (_DicAllScenes.ContainsKey(tmpsceneName))
             {
-                MultiABManager multiObj = _DicAllScenes[sceneName];
+                MultiABManager multiObj = _DicAllScenes[tmpsceneName];
                 multiObj.DisposeAllAsset();
             }
             else

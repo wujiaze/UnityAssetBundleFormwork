@@ -1,6 +1,8 @@
 fileFormatVersion: 2
 guid: b1c69d943fecb3542be2969667b0329f
 NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
   userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  assetBundleName: prefabs/building
+  assetBundleVariant: ab

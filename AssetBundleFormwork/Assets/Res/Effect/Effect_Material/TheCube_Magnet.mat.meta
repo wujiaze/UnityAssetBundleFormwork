@@ -1,7 +1,8 @@
 fileFormatVersion: 2
 guid: 3023a3c6eff14fd42a19c24751c7e9c6
 NativeFormatImporter:
+  externalObjects: {}
   mainObjectFileID: 0
   userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  assetBundleName: effect/effect_material
+  assetBundleVariant: ab

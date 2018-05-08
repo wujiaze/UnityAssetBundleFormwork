@@ -18,7 +18,7 @@ namespace AssetBundleFormWork
         // 场景名称
         private string _SceneName = "scene_1";
         // AB包名
-        private string _AsserBundleName = "prefabs_1.ab";
+        private string _AsserBundleName = "prefabs_1.ab"; // "scene_1/prefabs_1.ab"
         // 资源名称
         private string _AssetName = "sphere.prefab";
 
@@ -27,7 +27,10 @@ namespace AssetBundleFormWork
             // 加载 AB 包 
             StartCoroutine(AssetBundleManager.GetInstance().LoadAssetBundlePack(_SceneName, _AsserBundleName, LoadAllComplete));
         }
-
+        /// <summary>
+        /// 回调函数
+        /// </summary>
+        /// <param name="abName"></param>
         private void LoadAllComplete(string abName)
         {
             Object tmpObj = null;

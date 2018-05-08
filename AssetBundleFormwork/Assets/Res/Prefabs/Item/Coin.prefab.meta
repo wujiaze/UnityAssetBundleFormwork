@@ -3,6 +3,8 @@ guid: 06809bbb40845864ca476fb05389f69f
 timeCreated: 1496202814
 licenseType: Free
 NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 0
   userData: 
-  assetBundleName: 
-  assetBundleVariant: 
+  assetBundleName: prefabs/item
+  assetBundleVariant: ab

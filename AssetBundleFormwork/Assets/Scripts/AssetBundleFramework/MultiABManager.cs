@@ -78,11 +78,7 @@ namespace AssetBundleFormWork
                 yield return LoadReference(item, abName);
             }
             // 加载AB包
-            if (_DicSingleABLoaderCache.ContainsKey(abName))
-            {
-                yield return _DicSingleABLoaderCache[abName].LoadAssetBundle(); 
-            }
-            else
+            if (!_DicSingleABLoaderCache.ContainsKey(abName))
             {
                 _CurrentSingleABLoader = new SingleABLoader(abName, CompleteLoadAB);
                 _DicSingleABLoaderCache.Add(abName, _CurrentSingleABLoader);
@@ -91,7 +87,7 @@ namespace AssetBundleFormWork
         }
 
         /// <summary>
-        /// 加载引用项 :作用，这里未用到
+        /// 加载引用项 : todo 作用，这里未用到
         /// </summary>
         private IEnumerator LoadReference(string abName,string refAbName)
         {

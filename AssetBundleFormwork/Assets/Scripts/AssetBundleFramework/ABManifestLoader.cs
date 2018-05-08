@@ -118,7 +118,7 @@ namespace AssetBundleFormWork
         {
             if (_ManifestObj!=null && !string.IsNullOrEmpty(abName))
             {
-                return _ManifestObj.GetAllDependencies(abName);
+                return _ManifestObj.GetDirectDependencies(abName);
             }
             return null;
         }
