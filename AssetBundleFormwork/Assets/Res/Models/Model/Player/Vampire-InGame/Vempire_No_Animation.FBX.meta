@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a1bc1c6d3eeb7504b83f83f761a10994
+guid: 69bd7a488286c495fb9b1fe91ee54de2
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -30,7 +30,8 @@ ModelImporter:
     100048: Bip001 Spine
     100050: Bip001 Spine1
     100052: Bip001 Spine2
-    100054: //RootNode
+    100054: Vempire_Body
+    100056: //RootNode
     400000: Bip001
     400002: Bip001 Head
     400004: Bip001 L Calf
@@ -58,11 +59,18 @@ ModelImporter:
     400048: Bip001 Spine
     400050: Bip001 Spine1
     400052: Bip001 Spine2
-    400054: //RootNode
-    7400000: Idle
+    400054: Vempire_Body
+    400056: //RootNode
+    4300000: Vempire_Body
     9500000: //RootNode
     11100000: //RootNode
-  externalObjects: {}
+    13700000: Vempire_Body
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Vempire
+    second: {fileID: 2100000, guid: 6e38a551803074c828a5bd696a9527de, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -88,35 +96,7 @@ ModelImporter:
     animationWrapMode: 0
     extraExposedTransformPaths: []
     extraUserProperties: []
-    clipAnimations:
-    - serializedVersion: 16
-      name: Idle
-      takeName: Take 001
-      firstFrame: 0
-      lastFrame: 60
-      wrapMode: 2
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
+    clipAnimations: []
     isReadable: 1
   meshes:
     lODScreenPercentages: []
@@ -168,5 +148,5 @@ ModelImporter:
   humanoidOversampling: 1
   additionalBone: 1
   userData: 
-  assetBundleName: models/model
-  assetBundleVariant: ab
+  assetBundleName: 
+  assetBundleVariant: 

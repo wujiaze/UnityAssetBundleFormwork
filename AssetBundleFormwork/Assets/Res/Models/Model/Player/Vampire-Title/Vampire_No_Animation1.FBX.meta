@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 69bd7a488286c495fb9b1fe91ee54de2
+guid: b31392c3b52156446af8375939addc13
 ModelImporter:
   serializedVersion: 22
   fileIDToRecycleName:
@@ -30,8 +30,8 @@ ModelImporter:
     100048: Bip001 Spine
     100050: Bip001 Spine1
     100052: Bip001 Spine2
-    100054: Vempire_Body
-    100056: //RootNode
+    100054: //RootNode
+    100056: Vempire_Body
     400000: Bip001
     400002: Bip001 Head
     400004: Bip001 L Calf
@@ -59,8 +59,8 @@ ModelImporter:
     400048: Bip001 Spine
     400050: Bip001 Spine1
     400052: Bip001 Spine2
-    400054: Vempire_Body
-    400056: //RootNode
+    400054: //RootNode
+    400056: Vempire_Body
     4300000: Vempire_Body
     9500000: //RootNode
     11100000: //RootNode
@@ -70,7 +70,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Vempire
-    second: {fileID: 2100000, guid: 8ef42e4f489de1d4ea6caf9a2188ad7a, type: 2}
+    second: {fileID: 2100000, guid: a84da3b5430329d4a8f5bbc8c93def2f, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -148,5 +148,5 @@ ModelImporter:
   humanoidOversampling: 1
   additionalBone: 1
   userData: 
-  assetBundleName: models/model
-  assetBundleVariant: ab
+  assetBundleName: 
+  assetBundleVariant: 

@@ -151,6 +151,7 @@ namespace AssetBundleFormWork
         /// 生成AB包名
         /// AB 包形成规则：
         ///     文件AB包名称 = “所在二级目录名称”（场景名称）+“三级目录名称”（功能文件夹名称）
+        ///     若AB包名只在二级目录下，则 文件AB包名称 = “所在二级目录名称”（场景名称）+“所在二级目录名称”（场景名称）;
         /// </summary>
         /// <param name="fileInfo"></param>
         /// <returns></returns>
@@ -160,9 +161,10 @@ namespace AssetBundleFormWork
             int tmpIndx = fileInfo.FullName.IndexOf("Assets");
             string strAssetFilePath = fileInfo.FullName.Substring(tmpIndx);
             string[] tmpstr = strAssetFilePath.Split('\\'); // win路径是‘\’分割的
+
             if (tmpstr.Length == 4) 
             {
-                strABname = tmpstr[2] + "/" + tmpstr[2]; // unity路径是‘/’ 分割的
+                strABname = tmpstr[2] + "/" + tmpstr[2]; // unity路径是通过‘/’ 分割的
             }
             else if(tmpstr.Length >=5)
             {

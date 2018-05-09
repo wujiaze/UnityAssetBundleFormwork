@@ -19,11 +19,12 @@ namespace AssetBundleFormWork
         private string _SceneName = "scene_1";
         // AB包名
         private string _AsserBundleName = "prefabs_1.ab"; // "scene_1/prefabs_1.ab"
-        // 资源名称
-        private string _AssetName = "sphere.prefab";
+        // 资源名称 只需要最后的名称
+        private string _AssetName = "Sphere1.prefab";
 
         private void Awake()
         {
+           
             // 加载 AB 包 
             StartCoroutine(AssetBundleManager.GetInstance().LoadAssetBundlePack(_SceneName, _AsserBundleName, LoadAllComplete));
         }
