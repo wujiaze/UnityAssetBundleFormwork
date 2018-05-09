@@ -68,7 +68,7 @@ namespace AssetBundleFormWork
         static void BuildAbsforMac()
         {
             CreatAssetBundlePath();
-            BuildPipeline.BuildAssetBundles(outputPath, BuildAssetBundleOptions.None, BuildTarget.StandaloneOSX);
+            BuildPipeline.BuildAssetBundles(outputPath, BuildAssetBundleOptions.None, BuildTarget.StandaloneOSXIntel64);
             AssetDatabase.Refresh();
         }
         [MenuItem("AssetBundleTool/BuildforAndroid")]

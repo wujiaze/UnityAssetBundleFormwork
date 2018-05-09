@@ -16,11 +16,11 @@ namespace AssetBundleFormWork
     public class TestClass_ABMgr:MonoBehaviour
     {
         // 场景名称
-        private string _SceneName = "scene_1";
+        private string _SceneName = "prefabs";
         // AB包名
-        private string _AsserBundleName = "prefabs_1.ab"; // "scene_1/prefabs_1.ab"
+        private string _AsserBundleName = "setstartplatform.ab"; // "scene_1/prefabs_1.ab"
         // 资源名称 只需要最后的名称
-        private string _AssetName = "Sphere1.prefab";
+        private string _AssetName = "StaterPlatform.prefab";
 
         private void Awake()
         {
