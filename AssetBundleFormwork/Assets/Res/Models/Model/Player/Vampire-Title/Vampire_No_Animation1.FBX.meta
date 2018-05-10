@@ -70,7 +70,7 @@ ModelImporter:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Vempire
-    second: {fileID: 2100000, guid: e440814e516ad664aa3dd4cb6654653b, type: 2}
+    second: {fileID: 2100000, guid: 0a33563c628cc4045b452906266cb66f, type: 2}
   materials:
     importMaterials: 1
     materialName: 0
@@ -113,6 +113,8 @@ ModelImporter:
     optimizeMeshForGPU: 1
     keepQuads: 0
     weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
     secondaryUVAngleDistortion: 8
     secondaryUVAreaDistortion: 15.000001
     secondaryUVHardAngle: 88
