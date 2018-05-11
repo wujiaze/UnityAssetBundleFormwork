@@ -41,8 +41,6 @@ namespace AssetBundleFormWork
             // 这两个文件其实都是清单文件 ，.manifest是给我们看的，另一个 AB 包是给计算机看的，而其他的 AB 文件，则是 清单文件+资源文件
             // 所以这里需要加载的是给电脑看的清单文件 ，路径就是这样的
             _StrManifestPath = PathTools.GetABwwwPath() + "/" + PathTools.GetPlatformName();
-
-
         }
 
         /// <summary>
@@ -118,7 +116,7 @@ namespace AssetBundleFormWork
         {
             if (_ManifestObj!=null && !string.IsNullOrEmpty(abName))
             {
-                return _ManifestObj.GetAllDependencies(abName);
+                return _ManifestObj.GetDirectDependencies(abName);
             }
             return null;
         }

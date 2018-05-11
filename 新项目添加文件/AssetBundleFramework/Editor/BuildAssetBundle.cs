@@ -35,6 +35,7 @@ namespace AssetBundleFormWork
                 Directory.Delete(outputPath, true);
             }
             AssetDatabase.Refresh();
+            Debug.Log("本次操作完成");
         }
 
         static void CreatAssetBundlePath()
@@ -62,14 +63,16 @@ namespace AssetBundleFormWork
             BuildPipeline.BuildAssetBundles(outputPath, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows64);
             // 自动更新Asset文件夹
             AssetDatabase.Refresh();
+            Debug.Log("本次操作完成");
         }
 
         [MenuItem("AssetBundleTool/BuildforMacOSX")]
         static void BuildAbsforMac()
         {
             CreatAssetBundlePath();
-            BuildPipeline.BuildAssetBundles(outputPath, BuildAssetBundleOptions.None, BuildTarget.StandaloneOSX);
+            BuildPipeline.BuildAssetBundles(outputPath, BuildAssetBundleOptions.None, BuildTarget.StandaloneOSXIntel64);
             AssetDatabase.Refresh();
+            Debug.Log("本次操作完成");
         }
         [MenuItem("AssetBundleTool/BuildforAndroid")]
         static void BuildAbsforAndroid()
@@ -77,6 +80,7 @@ namespace AssetBundleFormWork
             CreatAssetBundlePath();
             BuildPipeline.BuildAssetBundles(outputPath, BuildAssetBundleOptions.None, BuildTarget.Android);
             AssetDatabase.Refresh();
+            Debug.Log("本次操作完成");
         }
         [MenuItem("AssetBundleTool/BuildforIOS")]
         static void BuildAbsforIOS()
@@ -84,6 +88,7 @@ namespace AssetBundleFormWork
             CreatAssetBundlePath();
             BuildPipeline.BuildAssetBundles(outputPath, BuildAssetBundleOptions.None, BuildTarget.iOS);
             AssetDatabase.Refresh();
+            Debug.Log("本次操作完成");
         }
     }
 }

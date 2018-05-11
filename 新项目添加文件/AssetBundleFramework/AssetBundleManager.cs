@@ -3,9 +3,15 @@
  *      Title:  "AssetBundle简单框架" 项目
  *              框架主流层（第四层）：所有 “场景”的 AB包管理
  *      Description:
- *              本框架使用前提：1、必须将资源放入Asset下的二级目录及以下
- *                             
- *              功能:
+ *              本框架使用说明：
+ *                          1、必须将资源放入Asset下的二级目录及以下
+ *                          2、同一个“二级目录”下，资源名称不能相同
+ *                          3、AB包名是带(.ab/.scene)的。（.manifest是后缀名）
+ *                          4、场景名称：指的是二级目录名称
+ *                          5、Assetbundle名称：指的的三级目录名称（这里可以单独使用 三级目录，也可以使用 二级目录/三级目录）内部添加了自我补全路径，若ab包存在于二级目录，那么包名就是二级目录/二级目录 或者 直接二级目录
+ *                          6、Asset名称：指的是资源路径下，最后一个“/”后的名称，不管这个资源是在几级目录之下，Unity会自己寻找，所以二级目录中，资源名称不能相同
+ *                          7、使用时需要修改下打包输入的路径名称
+ *                  功能:
  *                  1、读取 “Manifest”清单文件，缓存本脚本
  *                  2、以'场景'为单位，管理整个项目中所有的AB包
  *      Author:  wujiaze
@@ -74,21 +80,25 @@ namespace AssetBundleFormWork
             {
                 _CurrentAB = _CurrentSceneName + "/" + abName.ToLower();
             }
+
             // 等待Manifest清单文件加载完成
+
             while (!ABManifestLoader.GetInstance().IsLoadFinish)
             {
                 yield return null;
             }
             _ManifestObj = ABManifestLoader.GetInstance().GetABManifest();
-            if (_ManifestObj ==null)
+
+            if (_ManifestObj == null)
             {
                 Debug.LogError(GetType() + "/LoadAssetBundlePack()/_ManifestObj =null");
-                yield break; 
+                yield break;
             }
+
             // 把当前场景加入集合
             if (!_DicAllScenes.ContainsKey(_CurrentSceneName))
             {
-                MultiABManager multiMgrObj =new MultiABManager(_CurrentSceneName, _CurrentAB, loadAllCompleteHandle);
+                MultiABManager multiMgrObj = new MultiABManager(_CurrentSceneName, _CurrentAB, loadAllCompleteHandle);
                 _DicAllScenes.Add(_CurrentSceneName, multiMgrObj);
             }
             // 调用下一层（MultiABManager）
@@ -101,7 +111,7 @@ namespace AssetBundleFormWork
             else
             {
                 // 调用“多包管理类”来加载指定AB包
-                yield return tmpMultiAbManager.LoadAssetBundle(_CurrentAB); 
+                yield return tmpMultiAbManager.LoadAssetBundle(_CurrentAB);
             }
         }
 
@@ -127,7 +137,6 @@ namespace AssetBundleFormWork
             {
                 tmpabName = tmpsceneName+"/"+ abName.ToLower();
             }
-            
             if (_DicAllScenes.ContainsKey(tmpsceneName))
             {
                 MultiABManager multiObj = _DicAllScenes[tmpsceneName];
@@ -138,14 +147,15 @@ namespace AssetBundleFormWork
         }
 
         /// <summary>
-        /// 释放资源
+        /// 释放当前场景所有资源
         /// </summary>
         /// <param name="sceneName">场景名称</param>
         public void  DisposeAllAssets(string sceneName)
         {
-            if (_DicAllScenes.ContainsKey(sceneName))
+            string tmpsceneName = sceneName.ToLower();
+            if (_DicAllScenes.ContainsKey(tmpsceneName))
             {
-                MultiABManager multiObj = _DicAllScenes[sceneName];
+                MultiABManager multiObj = _DicAllScenes[tmpsceneName];
                 multiObj.DisposeAllAsset();
             }
             else

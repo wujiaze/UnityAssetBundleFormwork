@@ -18,7 +18,7 @@ namespace AssetBundleFormWork
     public class PathTools
     {
         /* 路径常量 */
-        public const string AB_RESOURCES = "AB_Res";
+        public const string AB_RESOURCES = "Res";
 
         /* 路径方法 */
         /// <summary>

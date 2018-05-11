@@ -74,15 +74,11 @@ namespace AssetBundleFormWork
             {
                 // 添加 “依赖项”
                 abRelation.AddDenpendce(item);
-                // 加载 “引用项”
+                // 添加 “引用项”
                 yield return LoadReference(item, abName);
             }
-            // 加载AB包
-            if (_DicSingleABLoaderCache.ContainsKey(abName))
-            {
-                yield return _DicSingleABLoaderCache[abName].LoadAssetBundle(); 
-            }
-            else
+            //加载AB包
+            if (!_DicSingleABLoaderCache.ContainsKey(abName))
             {
                 _CurrentSingleABLoader = new SingleABLoader(abName, CompleteLoadAB);
                 _DicSingleABLoaderCache.Add(abName, _CurrentSingleABLoader);
@@ -91,10 +87,16 @@ namespace AssetBundleFormWork
         }
 
         /// <summary>
-        /// 加载引用项 :作用，这里未用到
+        /// 添加引用项 
+        /// 作用：当两个包相互依赖时，光靠依赖关系，无法终止遍历，
+        /// 这里通过增加引用关系，来终止死循环。
+        /// 例如：A、B两包， A包先加载，添加B包为依赖项，B包将A包添加为引用项，然后加载B包
+        /// 此时，B包添加A包为依赖项,并且A包添加B包为引用项，由于A包已经添加过引用关系，所以不再加载B包，从而避免了循环
+        /// 总结：实际上，只需要一个有包名的列表就可以了，加载过的包名不在加载，就可以了，这里的引用的依赖包关系，没有用到
         /// </summary>
         private IEnumerator LoadReference(string abName,string refAbName)
         {
+            // 表示： 该 AB 包的引用包，已经加载过了，就不在加载，只需要添加到引用关系中
             if (_DicABRelation.ContainsKey(abName))
             {
                 ABRelation tmpABRelation = _DicABRelation[abName];
@@ -106,8 +108,8 @@ namespace AssetBundleFormWork
                 ABRelation tmpABRelation = new ABRelation(abName);
                 tmpABRelation.AddReference(refAbName);
                 _DicABRelation.Add(abName, tmpABRelation);
+                yield return LoadAssetBundle(abName);
             }
-            yield return LoadAssetBundle(abName);
         }
 
         /// <summary>
