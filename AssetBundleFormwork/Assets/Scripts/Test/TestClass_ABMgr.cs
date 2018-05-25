@@ -39,7 +39,6 @@ namespace AssetBundleFormWork
                 AssetBundleManager.GetInstance().DisposeAllAssets(_SceneName);
             }
         }
-
         /// <summary>
         /// 回调函数
         /// </summary>
@@ -47,12 +46,29 @@ namespace AssetBundleFormWork
         private void LoadAllComplete(string abName)
         {
             Object tmpObj = null;
+            // 也可以采用泛型加载
             tmpObj = AssetBundleManager.GetInstance().LoadAsset(_SceneName, abName, _AssetName, false) as Object;
             if (tmpObj != null)
             {
                 Instantiate(tmpObj);
             }
             AssetBundleManager.GetInstance().ShowAllABname();
+
+            // 测试泛型加载
+            // 测试结果表明：从AB包中加载同一个资源时，指向的是同一个内存地址 
+            Sprite sprite1 = AssetBundleManager.GetInstance().LoadAsset<Sprite>(_SceneName, "Textures_1.ab", "Floor", false);
+            Debug.Log(sprite1.name);
+            sprite1.name = "hhhhh";
+            Sprite sprite2 = AssetBundleManager.GetInstance().LoadAsset<Sprite>(_SceneName, "Textures_1.ab", "Floor", false);
+            Debug.Log(sprite2.name);
+            // 测试说明：采用 缓存机制，可以有效的提高效率
+            Sprite sprite3 = AssetBundleManager.GetInstance().LoadAsset<Sprite>(_SceneName, "Textures_1.ab", "WhileFloor", true);
+            Debug.Log(sprite3.name);
+            sprite3.name = "wwww";
+            Sprite sprite4 = AssetBundleManager.GetInstance().LoadAsset<Sprite>(_SceneName, "Textures_1.ab", "WhileFloor", true);
+            Debug.Log(sprite4.name);
+            
+
         }
     }
 }

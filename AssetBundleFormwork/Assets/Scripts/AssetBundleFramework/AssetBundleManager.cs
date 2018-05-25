@@ -179,7 +179,7 @@ namespace AssetBundleFormWork
                 MultiABManager multiObj = _DicAllScenes[_CurrentSceneName];
                 return multiObj.LoadAsset<T>(_CurrentAB, tmpassetName, isCache);
             }
-            Debug.LogError(GetType() + "/MyLoadAsset() sceneName 可能为空，或者未使用 LoadAssetBundlePack");
+            Debug.LogError(GetType() + "/MyLoadAsset() sceneName 可能为空，或者未使用 LoadAssetBundlePack 提前加载AB包");
             return default(T);
         }
 
