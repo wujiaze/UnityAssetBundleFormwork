@@ -50,11 +50,22 @@ namespace AssetBundleFormWork
         /// </summary>
         /// <param name="assetName">资源的名称</param>
         /// <param name="isCache">是否开启缓存</param>
-        public UnityEngine.Object LoadAsset(string assetName,bool isCache =false)
+        public UnityEngine.Object MyLoadAsset(string assetName,bool isCache =false)
         {
             return LoadResources<UnityEngine.Object>(assetName, isCache);
 
         }
+
+        /// <summary>
+        /// 加载当前包中指定的资源(泛型)
+        /// </summary>
+        /// <param name="assetName">资源的名称</param>
+        /// <param name="isCache">是否开启缓存</param>
+        public T MyLoadAsset<T>(string assetName, bool isCache = false) where T : UnityEngine.Object
+        {
+            return LoadResources<T>(assetName, isCache);
+        }
+
         /// <summary>
         /// 加载当前包中指定的资源
         /// </summary>
@@ -62,7 +73,7 @@ namespace AssetBundleFormWork
         /// <param name="assetName">资源的名称</param>
         /// <param name="isCache">是否开启缓存</param>
         /// <returns></returns>
-        private T LoadResources<T>(string assetName, bool isCache) where T : UnityEngine.Object
+        public T LoadResources<T>(string assetName, bool isCache) where T : UnityEngine.Object
         {
             // 是否缓存集合已存在
             if (_Ht.Contains(assetName))
@@ -75,13 +86,13 @@ namespace AssetBundleFormWork
             if (isCache && tmpResource!=null)
             {
                 _Ht.Add(assetName, tmpResource);
-            }else if (tmpResource == null) 
+            }
+            else if (tmpResource == null) 
             {
                 Debug.LogError(GetType()+ "/LoadResources<T> 参数 assetName 资源不存在");
             }
             return tmpResource;
         }
-
 
         /// <summary>
         /// 卸载指定资源（内存中卸载）
@@ -115,6 +126,8 @@ namespace AssetBundleFormWork
         public void DisposeAll()
         {
             _CurrentAB.Unload(true);
+            _Ht.Clear();
+            _Ht = null;
         }
 
         /// <summary>

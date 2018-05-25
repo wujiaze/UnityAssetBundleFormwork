@@ -5,14 +5,14 @@
  *      Description:
  *              功能: 自动给资源文件添加标记
  *              开发思路：
- *              1、定义需要打包资源的文件根目录 ： 这里是 AB_Res
+ *              1、定义需要打包资源的文件根目录 ： 这里是 PathTools.AB_RESOURCES
  *              2、遍历每个 “场景” 文件夹（目录）
  *                  A: 遍历本场景目录下所有的目录或文件
  *                     如果是目录，则继续 “递归” 访问里面的文件，直到定位到文件
  *                  B：找到文件，则使用 AssetImport 类，标记 “包名” 与 “后缀名”
  *                     包名(无论是哪个子目录中的文件)：统一  “场景名/功能目录名”
  *                     后缀名 ：一般用于更新升级
- *              
+ *              注意点：本方法使用的前提是所有需要打包的资源必须在“场景”目录中,即需要在 PathTools.AB_RESOURCES 下 存在二级目录
  *      Author:  wujiaze
  *      Date:    2018.5.3
  *      Modify:
@@ -29,7 +29,6 @@ namespace AssetBundleFormWork
     {
         /// <summary>
         /// 设置 AB 包名
-        /// 注意点：本方法使用的前提是所有需要打包的资源必须在“场景”目录中
         /// </summary>
         [MenuItem("AssetBundleTool/Creat AB Label")]
         static void CreatABLabel()
@@ -75,7 +74,7 @@ namespace AssetBundleFormWork
             // 刷新
             AssetDatabase.Refresh();
             // 提示信息，标记包名完成
-            Debug.Log("AssetBundle 本次操作设置标记完成！");
+            Debug.Log("AssetBundle 包名标记完成！");
         }
 
         /// <summary>

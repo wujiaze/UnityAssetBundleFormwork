@@ -66,14 +66,15 @@ namespace AssetBundleFormWork
                 yield return www;
                 if (www.progress >= 1)
                 {
-                    // 加载完成 湖区 AB 实例
+                    // 加载完成 获取 AB 实例
                     AssetBundle abObj = www.assetBundle;
                     if (abObj != null)
                     {
                         _ABReadManifest = abObj;
-                        // 从 主AB 文件中 ，加载 主清单文件，其实也就这一个资源，AssetBundleManifest 是固定常量
+                        // 从 主AB 文件中 ，加载 主清单文件，其实也就这一个资源，“AssetBundleManifest” 是固定常量
                         _ManifestObj = _ABReadManifest.LoadAsset(AbDefine.SYS_ASSETBUNDLE_MANIFEST) as AssetBundleManifest;
                         _isLoadFinish = true;
+          
                     }
                     else
                     {
@@ -107,8 +108,9 @@ namespace AssetBundleFormWork
             return null;
         }
 
+
         /// <summary>
-        /// 获取 AssetBundleManifest 中指定 AB 包的依赖项
+        /// 获取 AssetBundleManifest 中指定 AB 包的直接依赖项
         /// </summary>
         /// <param name="abName">指定 AB 包</param>
         /// <returns></returns>

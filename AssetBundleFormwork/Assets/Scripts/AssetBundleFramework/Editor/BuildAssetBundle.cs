@@ -26,7 +26,7 @@ namespace AssetBundleFormWork
         
 
         [MenuItem("AssetBundleTool/DeleteAllAssetBundle")]
-        static void DeleteAllAssetBundle()
+        private static void DeleteAllAssetBundle()
         {
             if (Directory.Exists(outputPath))
             {
@@ -35,10 +35,12 @@ namespace AssetBundleFormWork
                 Directory.Delete(outputPath, true);
             }
             AssetDatabase.Refresh();
-            Debug.Log("本次操作完成");
+            Debug.Log("删除已有AB包操作完成");
         }
-
-        static void CreatAssetBundlePath()
+        /// <summary>
+        /// 创建目录
+        /// </summary>
+        private static void CreatAssetBundlePath()
         {
             // 删除旧文件
             DeleteAllAssetBundle();
@@ -51,8 +53,8 @@ namespace AssetBundleFormWork
         /// 打包生成所有的AssetBundle(包)
         /// 功能：所有被添加AsstBundle标记的对象，都会被打包
         /// </summary>
-        [MenuItem("AssetBundleTool/BuildforWinDdow")]                                                                                                                                            
-        static void BuildAbsforWinDdow()
+        [MenuItem("AssetBundleTool/BuildforWinDdow")]
+        private static void BuildAbsforWinDdow()
         {
             // 打包后的存储路径---提前创建StreamingAssets文件夹/或代码创建文件夹
             CreatAssetBundlePath();
@@ -63,32 +65,32 @@ namespace AssetBundleFormWork
             BuildPipeline.BuildAssetBundles(outputPath, BuildAssetBundleOptions.None, BuildTarget.StandaloneWindows64);
             // 自动更新Asset文件夹
             AssetDatabase.Refresh();
-            Debug.Log("本次操作完成");
+            Debug.Log("WinDdow：本次操作完成");
         }
 
         [MenuItem("AssetBundleTool/BuildforMacOSX")]
-        static void BuildAbsforMac()
+        private static void BuildAbsforMac()
         {
             CreatAssetBundlePath();
-            BuildPipeline.BuildAssetBundles(outputPath, BuildAssetBundleOptions.None, BuildTarget.StandaloneOSXIntel64);
+            BuildPipeline.BuildAssetBundles(outputPath, BuildAssetBundleOptions.None, BuildTarget.StandaloneOSX);
             AssetDatabase.Refresh();
-            Debug.Log("本次操作完成");
+            Debug.Log("Mac：本次操作完成");
         }
         [MenuItem("AssetBundleTool/BuildforAndroid")]
-        static void BuildAbsforAndroid()
+        private static void BuildAbsforAndroid()
         {
             CreatAssetBundlePath();
             BuildPipeline.BuildAssetBundles(outputPath, BuildAssetBundleOptions.None, BuildTarget.Android);
             AssetDatabase.Refresh();
-            Debug.Log("本次操作完成");
+            Debug.Log("Android：本次操作完成");
         }
         [MenuItem("AssetBundleTool/BuildforIOS")]
-        static void BuildAbsforIOS()
+        private static void BuildAbsforIOS()
         {
             CreatAssetBundlePath();
             BuildPipeline.BuildAssetBundles(outputPath, BuildAssetBundleOptions.None, BuildTarget.iOS);
             AssetDatabase.Refresh();
-            Debug.Log("本次操作完成");
+            Debug.Log("IOS：本次操作完成");
         }
     }
 }

@@ -12,7 +12,6 @@
  *           
  */
 
-using System;
 using System.Collections;
 using UnityEngine;
 namespace AssetBundleFormWork
@@ -25,6 +24,7 @@ namespace AssetBundleFormWork
         private DelLoadComplete _LoadCompleteHandle;
         // 需要下载的 AB 名称
         private string _ABname;
+        public string ABname { get { return _ABname; } }
         // AB 的下载路径 URL
         private string _ABurl;
 
@@ -81,10 +81,25 @@ namespace AssetBundleFormWork
         {
             if (_assetLoader != null)
             {
-                return _assetLoader.LoadAsset(assetName, isCache);
+                return _assetLoader.MyLoadAsset(assetName, isCache);
             }
-            Debug.LogError(GetType() + "/LoadAsset() / _assetLoader 为空");
+            Debug.LogError(GetType() + "/MyLoadAsset() / _assetLoader 为空");
             return null;
+        }
+        /// <summary>
+        /// 加载 AB 包中的资源(泛型)
+        /// </summary>
+        /// <param name="assetName">指定的资源名称</param>
+        /// <param name="isCache">是否缓存</param>
+        /// <returns></returns>
+        public T LoadAsset<T>(string assetName, bool isCache) where T : UnityEngine.Object
+        {
+            if (_assetLoader != null)
+            {
+                return _assetLoader.MyLoadAsset<T>(assetName, isCache);
+            }
+            Debug.LogError(GetType() + "/MyLoadAsset() / _assetLoader 为空");
+            return default(T);
         }
 
         /// <summary>
@@ -134,6 +149,9 @@ namespace AssetBundleFormWork
             {
                 _assetLoader.DisposeAll();
                 _assetLoader = null;
+                _LoadCompleteHandle = null;
+                _ABname = null;
+                _ABurl = null;
             }
         }
 

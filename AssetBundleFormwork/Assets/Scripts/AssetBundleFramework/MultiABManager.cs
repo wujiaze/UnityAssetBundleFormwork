@@ -26,7 +26,7 @@ namespace AssetBundleFormWork
 
         // "AB包实现类"缓存集合（作用：缓存AB包，防止重复加载）
         private Dictionary<string, SingleABLoader> _DicSingleABLoaderCache;
-
+        public Dictionary<string, SingleABLoader> DicSingleABLoaderCache { get { return _DicSingleABLoaderCache; } }
         // 当前场景（调试使用）
         private string _CurrentSceneName;
 
@@ -36,8 +36,10 @@ namespace AssetBundleFormWork
         // AB 包与其对应依赖引用关系集合
         private Dictionary<string, ABRelation> _DicABRelation;
 
-        // 委托：所有AB包加载完成
-        private DelLoadComplete _LoadAllABPackageCompleteHandle;
+        /// <summary>
+        /// 委托：所有AB包加载完成
+        /// </summary>
+        private DelLoadComplete _loadAllABPackageCompleteHandle;
 
         /// <summary>
         /// 构造函数
@@ -45,13 +47,22 @@ namespace AssetBundleFormWork
         /// <param name="sceneName">场景名称</param>
         /// <param name="abName">AB包名臣</param>
         /// <param name="LoadAllABPackageCompleteHandle">委托：是否调用完成</param>
-        public MultiABManager(string sceneName,string abName,DelLoadComplete LoadAllABPackageCompleteHandle)
+        public MultiABManager(string sceneName)
         {
             _CurrentSceneName = sceneName;
-            _CurrentABName = abName;
-            _LoadAllABPackageCompleteHandle = LoadAllABPackageCompleteHandle;
             _DicSingleABLoaderCache=new Dictionary<string, SingleABLoader>();
             _DicABRelation =new Dictionary<string, ABRelation>();
+        }
+
+        /// <summary>
+        /// 设置当前的AB包名和处理委托
+        /// </summary>
+        /// <param name="abName"></param>
+        public void SetCurrentABNameAndHandler(string abName, DelLoadComplete LoadAllABPackageCompleteHandle)
+        {
+            _loadAllABPackageCompleteHandle = null;
+            _loadAllABPackageCompleteHandle = LoadAllABPackageCompleteHandle;
+            _CurrentABName = abName;
         }
 
         /// <summary>
@@ -61,15 +72,17 @@ namespace AssetBundleFormWork
         /// <returns></returns>
         public IEnumerator LoadAssetBundle(string abName)
         {
+
             // AB包关系的建立
             if (!_DicABRelation.ContainsKey(abName))
             {
-               ABRelation tmpABrelation = new ABRelation(abName);
+                ABRelation tmpABrelation = new ABRelation(abName);
                 _DicABRelation.Add(abName, tmpABrelation);
             }
             ABRelation abRelation = _DicABRelation[abName];
-            // 得到指定AB包的依赖关系
+            // 得到指定AB包的依赖引用关系
             string[] strDenendence = ABManifestLoader.GetInstance().RetrivalDependce(abName);
+            // 相同的包名在添加 依赖和引用项时 内部会做一个判断：查看是否添加过，添加过就不再添加了
             foreach (string item in strDenendence)
             {
                 // 添加 “依赖项”
@@ -112,23 +125,31 @@ namespace AssetBundleFormWork
             }
         }
 
+
         /// <summary>
         /// 加载指定AB包完成的委托
         /// </summary>
         /// <param name="abName">AB包名</param>
         private void CompleteLoadAB(string abName)
         {
-            if (abName.Equals(_CurrentABName)) // 每一个AB包加载完成，就会调用这个委托，只有当指定的AB包加载完成，才会执行最后的委托
+            if (abName.Equals(_CurrentABName)) // 每一个AB包加载完成，就会调用这个委托，只有当指定的AB包加载完成(即依赖包都加载完成)，才会执行最后的委托
             {
-                if (_LoadAllABPackageCompleteHandle != null)
+                if (_loadAllABPackageCompleteHandle != null)
                 {
-                    _LoadAllABPackageCompleteHandle(abName); 
+                    _loadAllABPackageCompleteHandle(abName); 
                 }
             }
         }
 
 
-        // 加载AB包中的资源
+        /// <summary>
+        /// 加载AB包中的资源,通过遍历
+        /// Resources加载实质也是通过遍历
+        /// </summary>
+        /// <param name="abName"></param>
+        /// <param name="assetName"></param>
+        /// <param name="isCache"></param>
+        /// <returns></returns>
         public UnityEngine.Object LoadAsset(string abName, string assetName, bool isCache)
         {
             foreach (var item in _DicSingleABLoaderCache)
@@ -138,10 +159,29 @@ namespace AssetBundleFormWork
                     return item.Value.LoadAsset(assetName, isCache);
                 }
             }
-            Debug.LogError(GetType()+ "/LoadAsset（） 找不到 AB 包 abName");
+            Debug.LogError(GetType()+ "/MyLoadAsset（） 找不到 AB 包 abName");
             return null;
         }
 
+        /// <summary>
+        /// 加载AB包中的资源(泛型)
+        /// </summary>
+        /// <param name="abName"></param>
+        /// <param name="assetName"></param>
+        /// <param name="isCache"></param>
+        /// <returns></returns>
+        public T LoadAsset<T>(string abName, string assetName, bool isCache) where T : UnityEngine.Object
+        {
+            foreach (var item in _DicSingleABLoaderCache)
+            {
+                if (item.Key == abName)
+                {
+                    return item.Value.LoadAsset<T>(assetName, isCache);
+                }
+            }
+            Debug.LogError(GetType() + "/MyLoadAsset（） 找不到 AB 包 abName");
+            return default(T);
+        }
 
         /// <summary>
         /// 释放本场景中所有的资源
@@ -151,10 +191,16 @@ namespace AssetBundleFormWork
         {
             try
             {
-                foreach (SingleABLoader singleAbLoader in _DicSingleABLoaderCache.Values)
+                if(_DicSingleABLoaderCache!=null&& _DicSingleABLoaderCache.Count > 0)
                 {
-                    singleAbLoader.DisposeAll();
+                    foreach (SingleABLoader singleAbLoader in _DicSingleABLoaderCache.Values)
+                    {
+                        singleAbLoader.DisposeAll();
+                    }
                 }
+            }
+            catch {
+                Debug.Log(GetType() + "DisposeAllAsset/ 出错");
             }
             finally
             {
@@ -165,7 +211,7 @@ namespace AssetBundleFormWork
                 _DicABRelation = null;
                 _CurrentSceneName = null;
                 _CurrentABName = null;
-                _LoadAllABPackageCompleteHandle = null;
+                _loadAllABPackageCompleteHandle = null;
                 _CurrentSingleABLoader = null;
                 // 卸载没有用到的资源
                 Resources.UnloadUnusedAssets();

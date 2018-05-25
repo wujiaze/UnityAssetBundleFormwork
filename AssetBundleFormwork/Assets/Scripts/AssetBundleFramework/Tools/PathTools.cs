@@ -18,6 +18,7 @@ namespace AssetBundleFormWork
     public class PathTools
     {
         /* 路径常量 */
+        // 意味着所有的资源文件都要放在这个目录下，当然可以修改成自己的文件名
         public const string AB_RESOURCES = "Res";
 
         /* 路径方法 */
@@ -31,7 +32,7 @@ namespace AssetBundleFormWork
         }
 
         /// <summary>
-        /// 获取AB输出路径
+        /// 获取AB打包后的输出路径
         /// 1、平台（PC/移动端）路径
         /// 2、平台的名称
         /// </summary>
@@ -64,7 +65,7 @@ namespace AssetBundleFormWork
         }
 
         /// <summary>
-        /// 平台的名称
+        /// 平台的名称，便于管理
         /// </summary>
         /// <returns></returns>
         public static string GetPlatformName()
