@@ -14,20 +14,32 @@ using UnityEngine;
 namespace AssetBundleFormWork
 {
     public class TestClass_ABMgr:MonoBehaviour
-    {
-        // 场景名称
-        private string _SceneName = "prefabs";
+    {  
+        // 场景名称 一般是场景名称，也可以是任意的名称（只需要是二级目录）
+        private string _SceneName = "Scene_1";
         // AB包名
-        private string _AsserBundleName = "setstartplatform.ab"; // "scene_1/prefabs_1.ab"
+        private string _AsserBundleName = "prefabs_1.ab"; // "scene_1/prefabs_1.ab"
         // 资源名称 只需要最后的名称
-        private string _AssetName = "StaterPlatform.prefab";
-
-        private void Awake()
+        private string _AssetName = "Sphere.prefab"; // “Sphere”
+        // 测试
+        private void Update()
         {
-           
-            // 加载 AB 包 
-            StartCoroutine(AssetBundleManager.GetInstance().LoadAssetBundlePack(_SceneName, _AsserBundleName, LoadAllComplete));
+            
+            if (Input.GetKeyDown(KeyCode.A))
+            {
+                // 加载 AB 包 
+                StartCoroutine(AssetBundleManager.GetInstance().LoadAssetBundlePack(_SceneName, _AsserBundleName, LoadAllComplete));
+            }
+            if (Input.GetKeyDown(KeyCode.B))
+            {
+
+            }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                AssetBundleManager.GetInstance().DisposeAllAssets(_SceneName);
+            }
         }
+
         /// <summary>
         /// 回调函数
         /// </summary>
@@ -36,19 +48,11 @@ namespace AssetBundleFormWork
         {
             Object tmpObj = null;
             tmpObj = AssetBundleManager.GetInstance().LoadAsset(_SceneName, abName, _AssetName, false) as Object;
-            if (tmpObj!=null)
+            if (tmpObj != null)
             {
                 Instantiate(tmpObj);
             }
+            AssetBundleManager.GetInstance().ShowAllABname();
         }
-        // 测试销毁资源
-        private void Update()
-        {
-            if (Input.GetKeyDown(KeyCode.A))
-            {
-                AssetBundleManager.GetInstance().DisposeAllAssets(_SceneName);
-            }
-        }
-
     }
 }

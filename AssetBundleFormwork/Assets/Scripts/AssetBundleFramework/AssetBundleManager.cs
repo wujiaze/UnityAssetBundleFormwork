@@ -199,7 +199,7 @@ namespace AssetBundleFormWork
             }
             else
             {
-                Debug.LogError(GetType() + "/DisposeAllAssets() sceneName 可能为空");
+                Debug.Log(GetType() + "/DisposeAllAssets() sceneName 可能为空");
             }
         }
    
