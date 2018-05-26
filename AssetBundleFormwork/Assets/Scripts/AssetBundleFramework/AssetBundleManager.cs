@@ -15,7 +15,7 @@
  *                  1、读取 “Manifest”清单文件，缓存本脚本
  *                  2、以'场景'为单位，管理整个项目中所有的AB包
  *                  
- *                  未完善功能：LoadAssetBundlePack 中 同一个SCENE中的不同AB包，若有相同的依赖包，就会多次加载
+ *                  
  *      Author:  wujiaze
  *      Date:    2018.5.3
  *      Modify:
