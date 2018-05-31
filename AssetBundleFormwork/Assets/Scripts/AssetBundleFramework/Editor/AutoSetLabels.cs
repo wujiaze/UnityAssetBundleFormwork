@@ -159,8 +159,14 @@ namespace AssetBundleFormWork
             string strABname = string.Empty;
             int tmpIndx = fileInfo.FullName.IndexOf("Assets");
             string strAssetFilePath = fileInfo.FullName.Substring(tmpIndx);
+            // 在windows系统 设置AB 包名
+#if UNITY_EDITOR_WIN
             string[] tmpstr = strAssetFilePath.Split('\\'); // win路径是‘\’分割的
-
+            // 在Mac OS系统 设置AB 包名
+#elif UNITY_EDITOR_OS
+            string[] tmpstr = strAssetFilePath.Split('/'); // OS路径是‘/’分割的
+#endif
+            Debug.Log(tmpstr);
             if (tmpstr.Length == 4) 
             {
                 strABname = tmpstr[2] + "/" + tmpstr[2]; // unity路径是通过‘/’ 分割的

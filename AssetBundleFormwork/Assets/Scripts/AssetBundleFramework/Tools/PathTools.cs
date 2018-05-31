@@ -51,9 +51,9 @@ namespace AssetBundleFormWork
             string strReturnPlayformPath = string.Empty;
             switch (Application.platform)
             {
-
                 case RuntimePlatform.WindowsPlayer:
                 case RuntimePlatform.WindowsEditor:
+                case RuntimePlatform.OSXEditor:
                     strReturnPlayformPath = Application.streamingAssetsPath;
                     break;
                 case RuntimePlatform.IPhonePlayer:
@@ -77,6 +77,9 @@ namespace AssetBundleFormWork
                 case RuntimePlatform.WindowsPlayer:
                 case RuntimePlatform.WindowsEditor:
                     strReturnPlayformName = "Window";
+                    break;
+                case RuntimePlatform.OSXEditor:
+                    strReturnPlayformName = "MacOS";
                     break;
                 case RuntimePlatform.IPhonePlayer:
                     strReturnPlayformName = "IPhone";
